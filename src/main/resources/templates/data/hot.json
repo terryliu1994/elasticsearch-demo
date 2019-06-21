@@ -1,0 +1,10 @@
+[{
+  "title": "Elastic",
+  "url": "http://localhost:8080/article/detail/10002"
+}, {
+  "title": "SpringBoot",
+  "url": "http://localhost:8080/article/detail/10003"
+}, {
+  "title": "组",
+  "url": "http://localhost:8080/article/detail/10007"
+}]

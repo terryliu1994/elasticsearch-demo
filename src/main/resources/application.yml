@@ -1,0 +1,25 @@
+spring:
+#  elasticsearch:
+#    rest:
+#      uris: http://192.168.217.140:9200/
+      #username: elastic
+      #password: elastic
+  data:
+    elasticsearch:
+      cluster-nodes:  192.168.217.140:9300
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:oracle:thin:@10.107.213.4:15595:RBSUAT011
+    username: rbsnewsit
+    password: RbsSit_2019#
+    driver-class-name: oracle.jdbc.OracleDriver
+  thymeleaf:
+    # 禁用缓存 实时生效
+    cache: false
+
+mybatis:
+  mapper-locations: classpath*:/**/mapper/*Mapper.xml
+
+#server:
+#  servlet:
+#    context-path: /es

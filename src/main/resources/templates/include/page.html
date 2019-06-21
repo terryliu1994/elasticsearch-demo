@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+</head>
+<body>
+<th:block th:with="defaultMaxSize=20" th:fragment="page(pageInfo,url)">
+    <ul class="pagination" style="float: right">
+        <li class="page-item" th:class="${pageInfo.first}?'page-item disabled':'page-item'" title="首页">
+            <a class="page-link" href="#" th:href="@{${url}(pageNum=1,pageSize=${pageInfo.size})}">
+                <i class="fa fa-angle-double-left"></i>
+            </a>
+        </li>
+        <li class="page-item" th:class="${pageInfo.first}?'page-item disabled':'page-item'" title="上一页">
+            <a class="page-link" href="#"
+               th:href="@{${url}(pageNum=${pageInfo.number}, pageSize=${pageInfo.size})}">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li th:if="${pageInfo.totalPages!=0}" class="page-item active"
+            th:each="i:${#numbers.sequence(1,pageInfo.totalPages)}"
+            th:class="${i}==${pageInfo.number}+1?'page-item active':'page-item'">
+            <a class="page-link" href="#" th:text="${i}"
+               th:href="@{${url}(pageNum=${i},pageSize=${pageInfo.size})}">1</a>
+        </li>
+
+        <li th:if="${pageInfo.totalPages==0}" th:class="'page-item active'">
+            <a class="page-link" href="#" th:text="1"
+               th:href="@{${url}(pageNum=1,pageSize=${pageInfo.size})}">1</a>
+        </li>
+
+        <li class="page-item" th:class="${pageInfo.last}?'page-item disabled':'page-item'" title="下一页">
+            <a class="page-link" href="#"
+               th:href="@{${url}(pageNum=${pageInfo.number}+2,pageSize=${pageInfo.size})}">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="page-item" th:class="${pageInfo.last}?'page-item disabled':'page-item '" title="末页">
+            <a class="page-link" href="#"
+               th:href="@{${url}(pageNum=${pageInfo.totalPages},pageSize=${pageInfo.size})}">
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+    <ul class="pagination" style="float: right;margin-right: 10px">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" th:text="|共 ${pageInfo.totalElements} 条记录|">total</a>
+        </li>
+    </ul>
+    <ul class="pagination page-size" style="float: right;margin-right: 10px">
+        <select th:value="${pageInfo.size}" onchange="window.location=this.value;">
+            <option th:each="i:${#numbers.sequence(5,defaultMaxSize,5)}"
+                    th:value="@{${url}(pageSize=${i})}"
+                    th:selected="${pageInfo.size}==${i}">[[${i}]]
+            </option>
+        </select>
+        <li class="page-item disabled"><a class="page-link" href="#">条/每页</a></li>
+    </ul>
+
+    <style>
+        .page-size select {
+            border-color: #dee2e6;
+            color: #6c757d !important;
+            border-radius: 3px 0 0 3px;
+            text-align: center;
+        }
+    </style>
+</th:block>
+
+</body>
+</html>

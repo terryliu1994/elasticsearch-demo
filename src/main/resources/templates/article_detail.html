@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://v4.bootcss.com/favicon.ico" th:href="@{/favicon.ico}">
+
+    <title>Terry's Elasticsearch Demo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.5.0/css/all.min.css}">
+
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"></script>
+</head>
+
+<body>
+<div th:replace="~{/include/bar::topbar }"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{/include/bar::sidebar(activeUri='article')}"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+            <a th:href="@{/article/list}">返回</a>
+            <h2 th:text="${article.title}">标题</h2>
+            <p>作者：<span th:text="${article.author}"></span></p>
+            <p>时间：<span id="creationDate"></span></p>
+            <p>
+                <span th:text="${article.content}"></span>
+            </p>
+
+        </main>
+    </div>
+</div>
+<script th:inline="javascript">
+    var article = [[${article}]];
+    // json格式会转换好看
+    $("#creationDate").text(article.creationDate);
+
+</script>
+
+</body>
+</html>
